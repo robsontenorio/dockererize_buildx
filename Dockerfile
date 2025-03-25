@@ -12,19 +12,14 @@ ENV CONTAINER_ROLE=${CONTAINER_ROLE}
 WORKDIR /var/www/app
 
 RUN apt update \
-  # Add PHP 8.4 repository  
+  # Add PHP 8.4 repository
+  && apt install -y software-properties-common && add-apt-repository ppa:ondrej/php \
+  # PHP extensions
   && apt install -y \
+  php8.4-zip \
   # Extra
-  curl \
-  git \
-  gnupg \
-  htop \
-  nano \
-  nginx \
-  supervisor \
-  unzip \
-  zsh
-
+  curl \  
+  unzip 
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer  | php -- --install-dir=/usr/bin --filename=composer
@@ -37,18 +32,6 @@ RUN userdel ubuntu
 RUN groupadd -f -g 1000 appuser
 RUN useradd -u 1000 -m -d /home/appuser -g appuser appuser
 
-# Config files
-#COPY --chown=appuser:appuser start.sh /usr/local/bin/start
-# COPY --chown=appuser:appuser config/etc /etc
-# COPY --chown=appuser:appuser config/etc/php/8.4/cli/conf.d/y-php.ini /etc/php/8.4/fpm/conf.d/y-php.ini
-
-# Permissions for start script
-#RUN chmod a+x /usr/local/bin/start
-
-# Required for php-fpm and nginx as non-root user
-#RUN mkdir -p /run/php
-#RUN chown -R appuser:appuser /var/www/app /var/log /var/lib /run
-#RUN chmod -R 777 /var/log /var/lib /run
 
 # Switch to non-root user
 USER appuser
