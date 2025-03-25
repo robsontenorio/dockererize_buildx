@@ -39,17 +39,6 @@ USER appuser
 # Laravel Installer
 RUN composer global require laravel/installer && composer clear-cache
 
-# OhMyZsh (better than "bash")
-RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# Add composer to PATH
-RUN echo 'export PATH="$PATH:$HOME/.config/composer/vendor/bin"' >> ~/.zshrc
-
-# Add SQL Tools to PATH
-RUN echo 'export PATH="$PATH:/opt/mssql-tools18/bin"' >> ~/.zshrc
-
-# Nginx (8080), Node (3000/3001), Laravel Dusk (9515/9773)
-EXPOSE 8080 8000 3000 3001 9515 9773
 
 # Start services through "supervisor" based on "CONTAINER_ROLE". See "start.sh".
 CMD ["/usr/local/bin/start"]
