@@ -65,12 +65,12 @@ RUN useradd -u 1000 -m -d /home/appuser -g appuser appuser
 # COPY --chown=appuser:appuser config/etc/php/8.4/cli/conf.d/y-php.ini /etc/php/8.4/fpm/conf.d/y-php.ini
 
 # Permissions for start script
-RUN chmod a+x /usr/local/bin/start
+#RUN chmod a+x /usr/local/bin/start
 
 # Required for php-fpm and nginx as non-root user
-RUN mkdir -p /run/php
-RUN chown -R appuser:appuser /var/www/app /var/log /var/lib /run
-RUN chmod -R 777 /var/log /var/lib /run
+#RUN mkdir -p /run/php
+#RUN chown -R appuser:appuser /var/www/app /var/log /var/lib /run
+#RUN chmod -R 777 /var/log /var/lib /run
 
 # Switch to non-root user
 USER appuser
