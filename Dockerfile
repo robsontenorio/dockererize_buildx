@@ -16,7 +16,7 @@ RUN apt update \
   && apt install -y software-properties-common && add-apt-repository ppa:ondrej/php \
   # PHP extensions
   && apt install -y \
-  php8.4-zip \
+  php8.4-cli \
   # Extra
   curl \  
   unzip 
